@@ -11,13 +11,13 @@ namespace MyShop.DataAccess.InMemory
     public class ProductRepository
     {
         ObjectCache cache = MemoryCache.Default;
-        List<Products> products;
+        List<Product> products;
         public ProductRepository()
         {
-            products = cache["products"] as List<Products>;
+            products = cache["products"] as List<Product>;
             if(products == null)
             {
-                products = new List<Products>();
+                products = new List<Product>();
             }
         }
 
@@ -25,14 +25,14 @@ namespace MyShop.DataAccess.InMemory
         {
             cache["products"] = products;
         }
-        public void Insert(Products p)
+        public void Insert(Product p)
         {
             products.Add(p);
         }
 
-        public void Update(Products product)
+        public void Update(Product product)
         {
-            Products productToUpdate = products.Find(p => p.Id == product.Id);
+            Product productToUpdate = products.Find(p => p.Id == product.Id);
             if(productToUpdate != null)
             {
                 productToUpdate = product;
@@ -42,9 +42,9 @@ namespace MyShop.DataAccess.InMemory
             }
         }
         
-        public Products Find(string id)
+        public Product Find(string id)
         {
-            Products target = products.Find(p => p.Id == id);
+            Product target = products.Find(p => p.Id == id);
             if(target == null)
             {
                 throw new Exception("Product not found");
@@ -54,14 +54,14 @@ namespace MyShop.DataAccess.InMemory
             }
         }
 
-        public IQueryable<Products> Collection()
+        public IQueryable<Product> Collection()
         {
             return products.AsQueryable();
         }
 
         public void Delete(string id)
         {
-            Products productToDelete = products.Find(p => p.Id == id);
+            Product productToDelete = products.Find(p => p.Id == id);
             if (productToDelete != null)
             {
                 products.Remove(productToDelete);
