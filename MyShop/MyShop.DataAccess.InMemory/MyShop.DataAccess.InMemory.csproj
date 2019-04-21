@@ -11,7 +11,6 @@
     <AssemblyName>MyShop.DataAccess.InMemory</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -42,12 +41,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ProductCategoryRepository.cs" />
     <Compile Include="ProductRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MyShop.Core\MyShop.Core.csproj">
-      <Project>{be54887b-bd02-46d1-85a5-bc2311abad82}</Project>
+      <Project>{9b029460-6f4e-46ae-9b88-08c5fe08c0a4}</Project>
       <Name>MyShop.Core</Name>
     </ProjectReference>
   </ItemGroup>
