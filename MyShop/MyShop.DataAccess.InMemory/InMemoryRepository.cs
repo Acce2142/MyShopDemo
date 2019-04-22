@@ -42,7 +42,7 @@ namespace MyShop.DataAccess.InMemory
             }
             else
             {
-                throw new Exception("Product Category no found");
+                throw new Exception(className+" not found");
             }
         }
 
@@ -56,7 +56,7 @@ namespace MyShop.DataAccess.InMemory
             }
             else
             {
-                throw new Exception("Product Category no found");
+                throw new Exception(className + " not found");
             }
         }
 
@@ -75,7 +75,7 @@ namespace MyShop.DataAccess.InMemory
             }
             else
             {
-                throw new Exception("Product no found");
+                throw new Exception(className + " not found");
             }
         }
     }
