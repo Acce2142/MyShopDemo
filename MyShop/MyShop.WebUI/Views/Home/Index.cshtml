@@ -7,10 +7,10 @@
 <div class="col-md-2">
     <h4>View by Category</h4>
     <div class="list-group">
-        @Html.ActionLink("All", "Index", null, new { });
+        @Html.ActionLink("All", "Index", null, new { @class = Request["category"] == null ? "list-group-item list-group-item-info" : "list-group-item"})
         @foreach(var cat in Model.ProductCategories)
         {
-            @Html.ActionLink(cat.Category, "Index", new { category = cat.Category}, new { })
+            @Html.ActionLink(cat.Category, "Index", new { category = cat.Category}, new { @class = Request["category"] == cat.Category ? "list-group-item list-group-item-info" : "list-group-item" } )
         }
     </div>
 </div>
