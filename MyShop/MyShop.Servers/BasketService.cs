@@ -7,6 +7,7 @@ using System.Web;
 using MyShop.Core;
 using MyShop.Core.Contracts;
 using MyShop.Core.Models;
+using MyShop.Core.ViewModels;
 
 namespace MyShop.Servers
 {
@@ -91,6 +92,32 @@ namespace MyShop.Servers
             {
                 basket.BasketItems.Remove(item);
                 BasketContext.Commit();
+            }
+        }
+
+        public List<BasketItemViewModel> GetBasketItems(HttpContextBase httpContext)
+        {
+            Basket basket = GetBasket(httpContext, false);
+            if (basket != null)
+            {
+                var result = (from b in basket.BasketItems
+                              join p in ProductContext.Collection() on b.ProductID equals p.Id
+                              select new BasketItemViewModel()
+                              {
+                                  id = b.Id,
+                                  Quanity = b.Quanity,
+                                  ProductName = p.Name,
+                                  Image = p.Image,
+                                  Price = p.Price
+
+                              }
+                             ).ToList();
+                return result;
+               
+            }
+            else
+            {
+                return new List<BasketItemViewModel>();
             }
         }
     }
