@@ -11,7 +11,7 @@ using MyShop.Core.ViewModels;
 
 namespace MyShop.Servers
 {
-    public class BasketService
+    public class BasketService : IBasketService
     {
         IRepository<Product> ProductContext;
         IRepository<Basket> BasketContext;
@@ -120,5 +120,27 @@ namespace MyShop.Servers
                 return new List<BasketItemViewModel>();
             }
         }
+
+        public BasketSummaryViewModel GetBasketSummary(HttpContextBase httpContext)
+        {
+            Basket basket = GetBasket(httpContext, false);
+            BasketSummaryViewModel model = new BasketSummaryViewModel(0, 0);
+            if (basket != null)
+            {
+                int? BasketCount = (from item in basket.BasketItems
+                                    select item.Quanity).Sum();
+                decimal? BasketTotal = (from item in basket.BasketItems
+                                        join p in ProductContext.Collection() on item.ProductID equals p.Id
+                                        select item.Quanity * p.Price).Sum();
+                model.BasketCount = BasketCount ?? 0;
+                model.BasketTotal = BasketTotal ?? decimal.Zero;
+                return model;
+            }
+            else
+            {
+                return model;
+            }
+        }
     }
+
 }
