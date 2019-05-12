@@ -25,13 +25,13 @@ namespace MyShop.WebUI.Controllers
         public ActionResult AddToBasket(string id)
         {
             basketService.AddToBasket(this.HttpContext, id);
-            return View();
+            return RedirectToAction("Index");
         }
 
         public ActionResult RemoveFromBasket(string id)
         {
             basketService.RemoveFromBasket(this.HttpContext, id);
-            return View();
+            return RedirectToAction("Index");
         }
 
         public PartialViewResult BasketSummary()
